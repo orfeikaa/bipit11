@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ggggggggModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="FIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Data" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Arenda" Relationship="Self.FK_transfers_expanate" FromRole="expanate" ToRole="transfers" />
+  </EntityType>
+  <EntityType Name="Avto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cost_avto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Arenda" Relationship="Self.FK_transfers_hall" FromRole="hall" ToRole="transfers" />
+  </EntityType>
+  <EntityType Name="Arenda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_fio" Type="Int32" Nullable="false" />
+    <Property Name="Id_avto" Type="Int32" Nullable="false" />
+    <Property Name="Data_take" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Data_re" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_transfers_expanate" FromRole="transfers" ToRole="expanate" />
+    <NavigationProperty Name="Avto" Relationship="Self.FK_transfers_hall" FromRole="transfers" ToRole="hall" />
+  </EntityType>
+  <Association Name="FK_transfers_expanate">
+    <End Role="expanate" Type="ggggggggModel.FIO" Multiplicity="1" />
+    <End Role="transfers" Type="ggggggggModel.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="expanate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="transfers">
+        <PropertyRef Name="Id_fio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_transfers_hall">
+    <End Role="hall" Type="ggggggggModel.Avto" Multiplicity="1" />
+    <End Role="transfers" Type="ggggggggModel.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hall">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="transfers">
+        <PropertyRef Name="Id_avto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ggggggggEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="expanate" EntityType="ggggggggModel.FIO" />
+    <EntitySet Name="hall" EntityType="ggggggggModel.Avto" />
+    <EntitySet Name="transfers" EntityType="ggggggggModel.Arenda" />
+    <AssociationSet Name="FK_transfers_expanate" Association="Self.FK_transfers_expanate">
+      <End Role="expanate" EntitySet="expanate" />
+      <End Role="transfers" EntitySet="transfers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_transfers_hall" Association="Self.FK_transfers_hall">
+      <End Role="hall" EntitySet="hall" />
+      <End Role="transfers" EntitySet="transfers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

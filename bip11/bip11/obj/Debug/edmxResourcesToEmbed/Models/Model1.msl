@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ggggggggModelContainer" CdmEntityContainer="ggggggggEntities">
+    <EntitySetMapping Name="expanate">
+      <EntityTypeMapping TypeName="ggggggggModel.FIO">
+        <MappingFragment StoreEntitySet="expanate">
+          <ScalarProperty Name="Id" ColumnName="id_exp" />
+          <ScalarProperty Name="FIO1" ColumnName="name_exp" />
+          <ScalarProperty Name="Data" ColumnName="autor_exp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hall">
+      <EntityTypeMapping TypeName="ggggggggModel.Avto">
+        <MappingFragment StoreEntitySet="hall">
+          <ScalarProperty Name="Id" ColumnName="id_h" />
+          <ScalarProperty Name="Model" ColumnName="name_h" />
+          <ScalarProperty Name="Cost_avto" ColumnName="space_h" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transfers">
+      <EntityTypeMapping TypeName="ggggggggModel.Arenda">
+        <MappingFragment StoreEntitySet="transfers">
+          <ScalarProperty Name="Id" ColumnName="id_tr" />
+          <ScalarProperty Name="Id_fio" ColumnName="id_exp_fk" />
+          <ScalarProperty Name="Id_avto" ColumnName="id_h_fk" />
+          <ScalarProperty Name="Data_take" ColumnName="date" />
+          <ScalarProperty Name="Data_re" ColumnName="stay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
